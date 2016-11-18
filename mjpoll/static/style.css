@@ -1,0 +1,62 @@
+body {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.progress-bar-to-reject {
+    background-color: #7F312E; /* TODO */
+}
+
+.progress-bar-poor {
+    background-color: #d9534f;
+}
+
+.progress-bar-acceptable {
+    background-color: #f0ad4e;
+}
+
+.progress-bar-fair {
+    background-color: #E5D34E; /* TODO */
+}
+
+.progress-bar-good {
+    background-color: #B8F04E; /* TODO */
+}
+
+.progress-bar-very-good {
+    background-color: #5cb85c;
+}
+
+.progress-bar-excelent {
+    background-color: #204020; /* TODO */
+}
+
+.choice {
+    word-wrap: break-word;
+}
+
+.top-buffer {
+    margin-top: 15px;
+}
+
+.example 
+{
+    margin-right: 0;
+    margin-left: 0;
+    background-color: #fff;
+    border-color: #ddd;
+    border-width: 1px;
+    border-radius: 4px 4px 0 0;
+    box-shadow: none;
+    position: relative;
+    padding: 15px 15px 0 15px;
+    border-style: solid;
+    border-bottom-style: dashed;
+}
+
+.example-code
+{
+    padding: 15px;
+    border-radius: 0 0 4px 4px;
+    border-top: none;
+}

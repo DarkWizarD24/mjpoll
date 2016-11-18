@@ -1,0 +1,333 @@
+# English translations for PROJECT.
+# Copyright (C) 2016 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2016.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2016-11-10 14:34+0100\n"
+"PO-Revision-Date: 2016-11-04 15:12+0100\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.3.4\n"
+
+#: mjpoll/views.py:67
+msgid "Poll deleted"
+msgstr ""
+
+#: mjpoll/views.py:75
+msgid "Error: cast invalid data"
+msgstr "Ballot data are invalids"
+
+#: mjpoll/views.py:84
+msgid "Ballot saved"
+msgstr ""
+
+#: mjpoll/views.py:86
+msgid "Invalid ballot"
+msgstr ""
+
+#: mjpoll/views.py:89
+msgid "Error: cast without data"
+msgstr "Ballot without data"
+
+#: mjpoll/views.py:120
+msgid "Error: preview without data"
+msgstr "Poll preview without data"
+
+#: mjpoll/views.py:130
+msgid "Error: poll without title"
+msgstr ""
+
+#: mjpoll/views.py:133
+msgid "Error: poll without message"
+msgstr ""
+
+#: mjpoll/views.py:136
+msgid "Error: poll without date"
+msgstr ""
+
+#: mjpoll/views.py:141
+msgid "Error: poll with invalid date"
+msgstr ""
+
+#: mjpoll/views.py:147
+msgid "Error: poll with an empty choice"
+msgstr ""
+
+#: mjpoll/views.py:151
+msgid "Error: poll with no choices"
+msgstr ""
+
+#: mjpoll/views.py:155
+msgid "Error: saving poll failed"
+msgstr ""
+
+#: mjpoll/views.py:157
+#, python-format
+msgid "Message: poll created with url %(url)s"
+msgstr ""
+
+#: mjpoll/views.py:160
+msgid "Error: poll without data"
+msgstr ""
+
+#: mjpoll/views.py:170
+msgid "Error: poll do not exits"
+msgstr "The poll do not exists."
+
+#: mjpoll/views.py:177
+msgid "Error: poll with not results"
+msgstr "The poll has no results."
+
+#: mjpoll/templates/ballot.html:51 mjpoll/templates/preview.html:2
+#, python-format
+msgid "Close %(date)s"
+msgstr ""
+
+#: mjpoll/templates/ballot.html:64 mjpoll/templates/ballot.html:73
+#: mjpoll/templates/preview.html:12 mjpoll/templates/preview.html:21
+#: mjpoll/templates/results.html:54
+msgid "To reject"
+msgstr ""
+
+#: mjpoll/templates/ballot.html:65 mjpoll/templates/ballot.html:74
+#: mjpoll/templates/preview.html:13 mjpoll/templates/preview.html:22
+#: mjpoll/templates/results.html:55
+msgid "Poor"
+msgstr ""
+
+#: mjpoll/templates/ballot.html:66 mjpoll/templates/ballot.html:75
+#: mjpoll/templates/preview.html:14 mjpoll/templates/preview.html:23
+#: mjpoll/templates/results.html:56
+msgid "Acceptable"
+msgstr ""
+
+#: mjpoll/templates/ballot.html:67 mjpoll/templates/ballot.html:76
+#: mjpoll/templates/preview.html:15 mjpoll/templates/preview.html:24
+#: mjpoll/templates/results.html:57
+msgid "Fair"
+msgstr ""
+
+#: mjpoll/templates/ballot.html:68 mjpoll/templates/ballot.html:77
+#: mjpoll/templates/preview.html:16 mjpoll/templates/preview.html:25
+#: mjpoll/templates/results.html:58
+msgid "Good"
+msgstr ""
+
+#: mjpoll/templates/ballot.html:69 mjpoll/templates/ballot.html:78
+#: mjpoll/templates/preview.html:17 mjpoll/templates/preview.html:26
+#: mjpoll/templates/results.html:59
+msgid "Very Good"
+msgstr ""
+
+#: mjpoll/templates/ballot.html:70 mjpoll/templates/ballot.html:79
+#: mjpoll/templates/preview.html:18 mjpoll/templates/preview.html:27
+#: mjpoll/templates/results.html:60
+msgid "Excellent"
+msgstr ""
+
+#: mjpoll/templates/ballot.html:85
+#, python-format
+msgid "%(voters)s voters"
+msgstr ""
+
+#: mjpoll/templates/ballot.html:87 mjpoll/templates/poll.html:44
+#: mjpoll/templates/poll.html:60
+msgid "Save"
+msgstr ""
+
+#: mjpoll/templates/ballot.html:91
+msgid "Voters"
+msgstr ""
+
+#: mjpoll/templates/error.html:3
+msgid "Errors"
+msgstr ""
+
+#: mjpoll/templates/list.html:3
+msgid "Polls list"
+msgstr ""
+
+#: mjpoll/templates/list.html:15
+msgid "List of polls you own"
+msgstr ""
+
+#: mjpoll/templates/list.html:18 mjpoll/templates/list.html:40
+msgid "Poll"
+msgstr ""
+
+#: mjpoll/templates/list.html:19 mjpoll/templates/list.html:41
+msgid "Actions"
+msgstr ""
+
+#: mjpoll/templates/list.html:25 mjpoll/templates/list.html:70
+msgid "Delete"
+msgstr ""
+
+#: mjpoll/templates/list.html:27 mjpoll/templates/list.html:48
+msgid "Results"
+msgstr ""
+
+#: mjpoll/templates/list.html:29
+msgid "Vote"
+msgstr ""
+
+#: mjpoll/templates/list.html:37
+msgid "List of polls you vote for"
+msgstr ""
+
+#: mjpoll/templates/list.html:50
+msgid "Edit"
+msgstr ""
+
+#: mjpoll/templates/list.html:58
+msgid "You do not create any poll or participate in a poll."
+msgstr ""
+
+#: mjpoll/templates/list.html:66 mjpoll/templates/list.html:86
+msgid "Delete poll: "
+msgstr ""
+
+#: mjpoll/templates/list.html:69 mjpoll/templates/poll.html:59
+msgid "Cancel"
+msgstr ""
+
+#: mjpoll/templates/page.html:32 mjpoll/templates/poll.html:3
+msgid "New Poll"
+msgstr ""
+
+#: mjpoll/templates/page.html:33
+msgid "My Polls"
+msgstr ""
+
+#: mjpoll/templates/poll.html:7
+msgid "Create Poll"
+msgstr ""
+
+#: mjpoll/templates/poll.html:8
+msgid "Message: create poll"
+msgstr ""
+"You can create a poll with any numbers of choices.<br><br/>You can format"
+" the message and the choices like this:"
+
+#: mjpoll/templates/poll.html:10 mjpoll/templates/poll.html:12
+msgid "Messge: poll example"
+msgstr ""
+"You can make a text **bold** or add *emphasis* to it.\n"
+"\n"
+"You can put url and they become links: "
+"https://en.wikipedia.org/wiki/Majority_judgment.\n"
+"\n"
+"You can make a [text](https://en.wikipedia.org/wiki/Majority_judgment) a "
+"link.\n"
+"\n"
+"You can create list of things:\n"
+"\n"
+"  * thing\n"
+"  * thing\n"
+"  * thing\n"
+"    * more thing\n"
+
+#: mjpoll/templates/poll.html:15
+msgid "Title"
+msgstr ""
+
+#: mjpoll/templates/poll.html:15
+msgid "Error: poll title empty"
+msgstr ""
+
+#: mjpoll/templates/poll.html:19
+msgid "Message"
+msgstr ""
+
+#: mjpoll/templates/poll.html:19
+msgid "Error: poll message empty"
+msgstr ""
+
+#: mjpoll/templates/poll.html:23
+msgid "End date"
+msgstr ""
+
+#: mjpoll/templates/poll.html:23
+msgid "Error: poll missing date or time"
+msgstr ""
+
+#: mjpoll/templates/poll.html:23
+msgid "Error: poll date in past"
+msgstr ""
+
+#: mjpoll/templates/poll.html:27
+msgid "Choices"
+msgstr ""
+
+#: mjpoll/templates/poll.html:31
+msgid "Add choice"
+msgstr ""
+
+#: mjpoll/templates/poll.html:36 mjpoll/templates/poll.html:40
+msgid "Preview"
+msgstr ""
+
+#: mjpoll/templates/poll.html:53
+msgid "Confirmation"
+msgstr ""
+
+#: mjpoll/templates/poll.html:56
+msgid "Message: poll save confirmation"
+msgstr ""
+
+#: mjpoll/templates/poll.html:83
+msgid "Error: poll choice empty"
+msgstr ""
+
+#: mjpoll/templates/results.html:7
+#, python-format
+msgid "Results for %(title)s"
+msgstr ""
+
+#: mjpoll/templates/results.html:11
+#, python-format
+msgid "Results for %(title)s (%(ballots)s ballots)"
+msgstr ""
+
+#: mjpoll/templates/results.html:12
+#, python-format
+msgid "Closed %(date)s"
+msgstr ""
+
+#: mjpoll/templates/results.html:15
+msgid "Ranking"
+msgstr ""
+
+#: mjpoll/templates/results.html:18
+msgid "Rank"
+msgstr ""
+
+#: mjpoll/templates/results.html:19
+msgid "Choice"
+msgstr ""
+
+#: mjpoll/templates/results.html:20
+msgid "Grade"
+msgstr ""
+
+#: mjpoll/templates/results.html:31
+msgid "Pecentages"
+msgstr ""
+
+#: mjpoll/templates/results.html:52
+msgid "Legend"
+msgstr ""
+
+#: mjpoll/templates/results.html:62
+msgid "Message: legend details"
+msgstr "Stripped grade is the majority grade."
+

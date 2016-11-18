@@ -1,0 +1,31 @@
+<h1>{{ title }}</h1>
+<h4>{{ _('Close %(date)s', date=end_date) }}</h4>
+<p>{{ message | md_message | safe }}</p>
+{% for choice in choices %}
+<hr/>
+<div class="row">
+    <div class="col-md-4 choice">
+        {{ choice | md_choice | safe }}
+    </div>
+    <div class="col-md-8">
+        <div class="btn-group btn-group-justified hidden-xs" role="group">
+            <a class="btn btn-default active">{{ _('To reject') }}</a>
+            <a class="btn btn-default">{{ _('Poor') }}</a>
+            <a class="btn btn-default">{{ _('Acceptable') }}</a>
+            <a class="btn btn-default">{{ _('Fair') }}</a>
+            <a class="btn btn-default">{{ _('Good') }}</a>
+            <a class="btn btn-default">{{ _('Very Good') }}</a>
+            <a class="btn btn-default">{{ _('Excellent') }}</a>
+        </div>
+        <div class="btn-group btn-group-vertical visible-xs" role="group">
+            <a class="btn btn-default active">{{ _('To reject') }}</a>
+            <a class="btn btn-default">{{ _('Poor') }}</a>
+            <a class="btn btn-default">{{ _('Acceptable') }}</a>
+            <a class="btn btn-default">{{ _('Fair') }}</a>
+            <a class="btn btn-default">{{ _('Good') }}</a>
+            <a class="btn btn-default">{{ _('Very Good') }}</a>
+            <a class="btn btn-default">{{ _('Excellent') }}</a>
+        </div>
+    </div>
+</div>
+{% endfor %}

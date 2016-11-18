@@ -1,0 +1,90 @@
+{% extends "page.html" %}
+
+{% block subtitle %}{{ _('Polls list') }}{% endblock %}
+
+{% block content %}
+	<div class="container">
+		{% with messages = get_flashed_messages(with_categories=true) %}
+			{% if messages %}
+				{% for category, message in messages %}
+					<div class="alert alert-{{ category }}" role="alert">{{ message | urlize }}</div>
+				{% endfor %}
+			{% endif %}
+		{% endwith %}
+		{% if own_polls | length != 0 %}
+			<h1>{{ _('List of polls you own') }}</h1>
+			<table class="table">
+				<tr>
+					<th class="col-md-9">{{ _('Poll') }}</th>
+					<th class="col-md-3"><strong>{{ _('Actions') }}</strong></th>
+				</tr>
+				{% for poll in own_polls %}
+				<tr>
+					<td class="col-md-9">{{ poll.title }}</td>
+					<td class="col-md-3">
+						<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#confirmation" data-poll-title="{{ poll.title }}" data-poll-uid="{{ poll.uid }}"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> {{ _('Delete') }}</button>
+						{% if poll.closed %}
+							<a href="{{ poll.uid }}" class="btn btn-info"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> {{ _('Results') }}</a>
+						{% else %}
+							<a href="{{ poll.uid }}" class="btn btn-primary"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> {{ _('Vote') }}</a>
+						{% endif %}
+					</td>
+				</tr>
+				{% endfor %}
+			</table>
+		{% endif %}
+		{% if participate_polls | length != 0 %}
+			<h1>{{ _('List of polls you vote for') }}</h1>
+			<table class="table">
+				<tr>
+					<th><strong>{{ _('Poll') }}</strong></th>
+					<th class="col-md-1"><strong>{{ _('Actions') }}</strong></th>
+				</tr>
+				{% for poll in participate_polls %}
+				<tr>
+					<td>{{ poll.title }}</td>
+					<td class="col-md-1">
+						{% if poll.closed %}
+							<a href="{{ poll.uid }}" class="btn btn-info"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> {{ _('Results') }}</a>
+						{% else %}
+							<a href="{{ poll.uid }}" class="btn btn-primary"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> {{ _('Edit') }}</a>
+						{% endif %}
+					</td>
+				</tr>
+				{% endfor %}
+			</table>
+		{% endif %}
+		{% if own_polls | length == 0 and participate_polls | length == 0 %}
+			<p>{{ _('You do not create any poll or participate in a poll.') }}</p>
+		{% endif %}
+		
+		<div class="modal fade" id="confirmation" tabindex="-1" role="dialog" aria-labelledby="confirmation">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="exampleModalLabel">{{ _('Delete poll: ') }}</h4>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">{{ _('Cancel') }}</button>
+						<a  class="btn btn-danger"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> {{ _('Delete') }}</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script type="text/javascript">
+	$('#confirmation').on('show.bs.modal', function (event) {
+		var button = $(event.relatedTarget) // Button that triggered the modal
+		var title = button.data('poll-title')
+		var uid = button.data('poll-uid') 
+		var modal = $(this)
+		modal.find('.modal-title').text('{{ _('Delete poll: ') }}' + title)
+		modal.find('.modal-footer .btn-danger').attr('href', 'delete/' + uid)
+	})
+</script>
+{% endblock %}

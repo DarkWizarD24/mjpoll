@@ -1,0 +1,181 @@
+{% extends "page.html" %}
+
+{% block subtitle %}{{ super() }}{{ _('New Poll') }}{% endblock %}
+
+{% block content %}
+<div class="container">
+	<h1>{{ _('Create Poll') }}</h1>
+	<p>{{ _('Message: create poll') }}</p>
+	<div class="example">
+	    {{ _('Messge: poll example') | md_message | safe }}
+    </div>
+    <pre class="example-code">{{ _('Messge: poll example') }}</pre>
+	<form action="save" method="post">
+		<div class="form-group" id="poll-title-group">
+			<label class="control-label" for="poll-title">{{ _('Title') }} <span id="poll-title-error" class="hidden">{{ _('Error: poll title empty') }}</span></label>
+			<input class="form-control" type="text" name="poll_title" id="poll-title" aria-describedby="poll-title">	
+		</div>
+		<div class="form-group" id="poll-message-group">
+			<label class="control-label" for="poll-message">{{ _('Message') }} <span id="poll-message-error" class="hidden">{{ _('Error: poll message empty') }}</span></label>
+			<textarea class="form-control" rows="10" name="poll_message" id="poll-message"></textarea>
+		</div>
+		<div class="form-group" id="poll-end-date-group">
+			<label class="control-label" for="poll-end-date">{{ _('End date') }} <span id="poll-end-date-empty" class="hidden">{{ _('Error: poll missing date or time') }}</span><span id="poll-end-date-past" class="hidden">{{ _('Error: poll date in past') }}</span></label>
+			<input type='datetime-local' class="form-control" name="poll_end_date" id="poll-end-date"/>
+		</div>
+		<div class="panel panel-default">
+		    <div class="panel-heading"><strong>{{ _('Choices') }}</strong></div>
+			<div class="panel-body" id="choices">
+			</div>
+			<div class="panel-footer" style="text-align:right">
+				<a class="btn btn-primary" onclick="addChoice()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> {{ _('Add choice') }}</a>
+			</div>
+		</div>
+		<div class="clearfix">
+		    <div class="pull-right" style="text-align:right">
+			    <a class="btn btn-info" onclick="preview()"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> {{ _('Preview') }}</a>
+		    </div>
+		</div>
+		<div class="panel panel-info top-buffer hidden" id="preview-container">
+		    <div class="panel-heading">{{ _('Preview') }}</div>
+            <div class="panel-body" id="preview">
+            </div>
+            <div class="panel-footer" style="text-align:right">
+                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#confirmation"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> {{ _('Save') }}</button>
+		    </div>
+		</div>
+		
+		<div class="modal fade" id="confirmation" tabindex="-1" role="dialog" aria-labelledby="confirmation">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="exampleModalLabel">{{ _('Confirmation') }}</h4>
+					</div>
+					<div class="modal-body">
+					    <p>{{ _('Message: poll save confirmation') }}</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">{{ _('Cancel') }}</button>
+						<button class="btn btn-danger" type="submit"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> {{ _('Save') }}</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script type="text/javascript">
+function removeChoice (index)
+{
+	$('#poll-choice-group-' + index).remove();
+}
+
+var new_choice = 1;
+
+function addChoice (index)
+{	
+	$("#choices").append("\
+	    <div class=\"form-group\" id=\"poll-choice-group-" + String(new_choice) + "\"> \
+		    <label class=\"control-label\" for=\"poll-choice-" + String(new_choice) + "\"><span class=\"poll-choice-error hidden\">{{ _('Error: poll choice empty') }}</span></label> \
+			<div class=\"input-group\"> \
+			    <textarea class=\"form-control\" rows=\"3\" name=\"poll_choice_" + String(new_choice) + "\" id=\"poll-choice-" + String(new_choice) + "\"></textarea> \
+				<span class=\"input-group-addon\"> \
+					<button class=\"btn btn-danger\" type=\"button\" onclick=\"removeChoice('" + String(new_choice) + "')\"><span class=\"glyphicon glyphicon-trash\"></span></button> \
+				</span> \
+			</div> \
+		</div>");
+	new_choice += 1;
+}
+
+function preview ()
+{
+    var error = false;
+    if ($("#poll-title").val() == "")
+    {
+      $("#poll-title-group").addClass("has-error has-feedback");
+      $("#poll-title-error").removeClass("hidden");
+      error = true;
+    }
+    else
+    {
+      $("#poll-title-group").removeClass("has-error has-feedback");
+      $("#poll-title-error").addClass("hidden");
+    }
+    
+    if ($("#poll-message").val() == "")
+    {
+      $("#poll-message-group").addClass("has-error has-feedback");
+      $("#poll-message-error").removeClass("hidden");
+      error = true;
+    }
+    else
+    {
+      $("#poll-message-group").removeClass("has-error has-feedback");
+      $("#poll-message-error").addClass("hidden");
+    }
+    
+    if ($("#poll-end-date").val() == "")
+    {
+      $("#poll-end-date-group").addClass("has-error has-feedback");
+      $("#poll-end-date-empty").removeClass("hidden");
+      error = true;
+    }
+    else
+    {
+      $("#poll-end-date-empty").addClass("hidden");
+      var end_date = new Date($('#poll-end-date').val());
+      var now = new Date();
+      if (end_date < now)
+      {
+        $("#poll-end-date-group").addClass("has-error has-feedback");
+        $("#poll-end-date-past").removeClass("hidden");
+        error = true;
+      }
+      else
+      {
+        $("#poll-end-date-group").removeClass("has-error has-feedback");
+        $("#poll-end-date-past").addClass("hidden");
+      }
+    }
+    
+    $("#choices .form-group").each(function(index) {
+      if ($(this).find("textarea").val() == "")
+      {
+        $(this).addClass("has-error has-feedback");
+        $(this).find(".poll-choice-error").removeClass("hidden");
+        error = true;
+      }
+      else
+      {
+        $(this).removeClass("has-error has-feedback");
+        $(this).find(".poll-choice-error").addClass("hidden");
+      }
+    });
+    
+    if (error == false)
+    {
+      var poll = {title: $('#poll-title').val(), end_date: $('#poll-end-date').val(), message: $('#poll-message').val()};
+      $("#choices .form-group").each(function(index) {
+	    poll['choice_' + index] = $(this).find("textarea").val();
+      });
+      
+      $.post("preview", poll, function(data) {
+        $("#preview").empty().html(data);
+        $("#preview-container").removeClass("hidden");
+        $('html, body').animate({
+          scrollTop: $("#preview").offset().top
+        }, 200);
+      }, "html");
+    }
+    else
+    {
+      $("#preview-container").addClass("hidden");
+    }
+}
+
+</script>
+{% endblock %}

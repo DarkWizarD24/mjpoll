@@ -1,0 +1,9 @@
+{% extends "page.html" %}
+
+{% block subtitle %}{{ _('Errors') }}{% endblock %}
+
+{% block content %}
+<div class="container">
+	<div class="alert alert-danger" role="alert"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> {{ message }}</div>
+</div>
+{% endblock %}

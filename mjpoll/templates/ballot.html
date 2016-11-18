@@ -1,0 +1,109 @@
+{% extends "page.html" %}
+
+{% block subtitle %}{{ poll.title }}{% endblock %}
+
+{% macro active(choice, value) -%}
+	{%- if ballot[choice.id] == value %}active {% endif -%}
+{% endmacro %}
+
+{% block content %}
+<div class="container">
+	<script>
+		function set (id, value)
+		{
+			document.getElementById(id).value = value;
+		}
+		
+		function get (id)
+		{
+			return document.getElementById(id).value;
+		}
+		
+		function activate (id)
+		{
+			document.getElementById(id).classList.add('active');
+		}
+
+		function deactivate (id)
+		{
+			document.getElementById(id).classList.remove('active');
+		}
+		
+		function select (choice, value)
+		{
+			deactivate('choice_' + choice + '_' + get('choice_' + choice) + '_h');
+			deactivate('choice_' + choice + '_' + get('choice_' + choice) + '_v');
+			set('choice_' + choice, value);
+			activate('choice_' + choice + '_' + value + '_h');
+			activate('choice_' + choice + '_' + value + '_v');
+		}
+	</script>
+	
+	{% with messages = get_flashed_messages(with_categories=true) %}
+		{% if messages %}
+			{% for category, message in messages %}
+				<div class="alert alert-{{ category }}" role="alert">{{ message }}</div>
+			{% endfor %}
+		{% endif %}
+	{% endwith %}
+	
+	<h1>{{ poll.title }}</h1>
+	<h4>{{ _('Close %(date)s', date=poll.end_date) }}</h4>
+	<p>{{ poll.message | md_message | safe }}</p>
+	<form action="cast" method="post">
+		<input type="hidden" name="poll" value="{{ poll.uid }}">
+		<hr/>
+		{% for choice in poll.choices %}
+			<div class="row">
+				<input type="hidden" name="choice_{{ choice.id }}" id="choice_{{ choice.id }}" value="{{ ballot[choice.id] }}">
+				<div class="col-md-4 choice">
+				{{ choice.text | md_choice | safe }}
+				</div>
+				<div class="col-md-8">
+					<div class="btn-group btn-group-justified hidden-xs" role="group">
+						<a onclick="select('{{ choice.id }}', '0')" class="btn btn-default {{ active(choice, 0) }}" id="choice_{{ choice.id }}_0_v">{{ _('To reject') }}</a>
+						<a onclick="select('{{ choice.id }}', '1')" class="btn btn-default {{ active(choice, 1) }}" id="choice_{{ choice.id }}_1_v">{{ _('Poor') }}</a>
+						<a onclick="select('{{ choice.id }}', '2')" class="btn btn-default {{ active(choice, 2) }}" id="choice_{{ choice.id }}_2_v">{{ _('Acceptable') }}</a>
+						<a onclick="select('{{ choice.id }}', '3')" class="btn btn-default {{ active(choice, 3) }}" id="choice_{{ choice.id }}_3_v">{{ _('Fair') }}</a>
+						<a onclick="select('{{ choice.id }}', '4')" class="btn btn-default {{ active(choice, 4) }}" id="choice_{{ choice.id }}_4_v">{{ _('Good') }}</a>
+						<a onclick="select('{{ choice.id }}', '5')" class="btn btn-default {{ active(choice, 5) }}" id="choice_{{ choice.id }}_5_v">{{ _('Very Good') }}</a>
+						<a onclick="select('{{ choice.id }}', '6')" class="btn btn-default {{ active(choice, 6) }}" id="choice_{{ choice.id }}_6_v">{{ _('Excellent') }}</a>
+					</div>
+					<div class="btn-group btn-group-vertical visible-xs"" role="group">
+						<a onclick="select('{{ choice.id }}', '0')" class="btn btn-default {{ active(choice, 0) }}" id="choice_{{ choice.id }}_0_h">{{ _('To reject') }}</a>
+						<a onclick="select('{{ choice.id }}', '1')" class="btn btn-default {{ active(choice, 1) }}" id="choice_{{ choice.id }}_1_h">{{ _('Poor') }}</a>
+						<a onclick="select('{{ choice.id }}', '2')" class="btn btn-default {{ active(choice, 2) }}" id="choice_{{ choice.id }}_2_h">{{ _('Acceptable') }}</a>
+						<a onclick="select('{{ choice.id }}', '3')" class="btn btn-default {{ active(choice, 3) }}" id="choice_{{ choice.id }}_3_h">{{ _('Fair') }}</a>
+						<a onclick="select('{{ choice.id }}', '4')" class="btn btn-default {{ active(choice, 4) }}" id="choice_{{ choice.id }}_4_h">{{ _('Good') }}</a>
+						<a onclick="select('{{ choice.id }}', '5')" class="btn btn-default {{ active(choice, 5) }}" id="choice_{{ choice.id }}_5_h">{{ _('Very Good') }}</a>
+						<a onclick="select('{{ choice.id }}', '6')" class="btn btn-default {{ active(choice, 6) }}" id="choice_{{ choice.id }}_6_h">{{ _('Excellent') }}</a>
+					</div>
+				</div>
+			</div>
+			<hr/>
+		{% endfor %}
+		<a class="btn btn-info" onclick="show_voters()"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{ _('%(voters)s voters', voters=voters|count) }}</a>
+		<div class="span6 pull-right" style="text-align:right">
+			<button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> {{ _('Save') }}</button>
+		</div>
+	</form>
+	<div class="panel panel-info top-buffer hidden" id="voters">
+	    <div class="panel-heading">{{ _('Voters') }}</div>
+        <div class="panel-body" id="preview">
+	        {% for voter in voters %}
+	            <p>{{ voter }}</p>
+	        {% endfor %}
+	    </div>
+	</div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script type="text/javascript">
+function show_voters()
+{
+  $("#voters").toggleClass("hidden");
+}
+</script>
+{% endblock %}

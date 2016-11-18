@@ -1,0 +1,28 @@
+Update translation
+==================
+
+Tu update the translation files, executes this commands at the root of the repository.
+
+Build translation catalogue
+---------------------------
+
+  pybabel extract -F babel.cfg -o messages.pot mjpoll
+  
+Update the translations with this new catalogue
+-----------------------------------------------
+
+  pybabel update -i messages.pot -d mjpoll/translations
+  
+Compile translation
+-------------------
+
+  pybabel compile -d mjpoll/translations
+
+Add a new language
+------------------
+
+Edit the file mjpoll/mjpoll/application.cfg and add the language to it.
+
+Execute :
+  
+  pybabel init -i messages.pot -d mjpoll/translations -l XX

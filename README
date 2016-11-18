@@ -1,0 +1,26 @@
+MJPoll
+======
+
+Moajorit jugement poll.
+
+Setup
+-----
+
+  $ pip2 install Flask
+  $ pip2 install Flask-Babel
+  $ pip2 install Flask-Bootstrap
+  $ pip2 install markdown
+  $ pip2 install bleach
+
+  $ python2
+  >>> import mjpoll.data
+  >>> mjpoll.data.init_db()
+
+
+
+References
+----------
+
+https://sites.google.com/site/ridalaraki/majority-judgment
+http://www.college-de-france.fr/media/pierre-rosanvallon/UPL8954465031560637643_Balinski__Laraki.pdf
+
